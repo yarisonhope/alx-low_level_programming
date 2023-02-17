@@ -1,14 +1,11 @@
+#include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-/* more headers goes there */
-#include <stdio.h>
-/* betty style doc for function main goes there */
 /**
- * main - entry point
- *
- * Return: always 0
- */
-
+* main - Check if a number is Positive or Negatiive
+*
+* Return: always return 0
+*/
 int main(void)
 {
 	int n;
@@ -17,12 +14,17 @@ int main(void)
 	n = rand() - RAND_MAX / 2;
 	/* your code goes there */
 	if (n > 0)
-		printf("%d is positive", n);
-	else if (n == 0)
-		printf("%d is zero", n);
-	else if (n < 0)
-		printf("%d is negetive", n);
-	printf("\n");
-
+	{
+		/* if the number is greater than 0: is positive */
+		printf("%d is positive\n", n);
+	} else if (n == 0)
+	{
+		/* if the number is 0: is zero */
+		printf("%d is zero\n", n);
+	} else
+	{
+		/* if the number is less than 0: is negative */
+		printf("%d is negative\n", n);
+	}
 	return (0);
 }
