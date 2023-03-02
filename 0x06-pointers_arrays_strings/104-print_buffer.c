@@ -2,30 +2,51 @@
 #include <stdio.h>
 
 /**
- * rot13 - encoder rot13
- * @s: pointer to string params
- *
- * Return: *s
+ * print_buffer - prints buffer
+ * @b: buffer
+ * @size: size
+ * Return: void
  */
 
-char *rot13(char *s)
+void print_buffer(char *b, int size)
 {
-	int i;
-	int j;
-	char data1[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-	char datarot[] = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
+	int o, j, i;
 
-	for (i = 0; s[i] != '\0'; i++)
+	o = 0;
+
+	if (size <= 0)
 	{
-		for (j = 0; j < 52; j++)
+		printf("\n");
+		return;
+	}
+	while (o < size)
+	{
+		j = size - o < 10 ? size - o : 10;
+		printf("%08x: ", o);
+		for (i = 0; i < 10; i++)
 		{
-			if (s[i] == data1[j])
+			if (i < j)
+				printf("%02x", *(b + o + i));
+			else
+				printf("  ");
+			if (i % 2)
 			{
-				s[i] = datarot[j];
-				break;
+				printf(" ");
 			}
 		}
+		for (i = 0; i < j; i++)
+		{
+			int c = *(b + o + i);
+
+			if (c < 32 || c > 132)
+			{
+				c = '.';
+			}
+			printf("%c", c);
+		}
+		printf("\n");
+		o += 10;
 	}
-	return (s);
 }
+
 
