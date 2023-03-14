@@ -1,37 +1,38 @@
 #include <stdlib.h>
 #include "main.h"
 /**
- * alloc_grid - create 2 dimensional array of integers
- * @width: row of the array
- * @height: column of the array
- * Return: A pointer to a 2 dimensional array
+ * str_concat - concatenate two strings
+ * @s1: first string to be concatenated
+ * @s2: second string to be concatenated
+ * Return: NULL on failure or concatenated string
  */
-int **alloc_grid(int width, int height)
+char *str_concat(char *s1, char *s2)
 {
-	int **arr;
-	int i, j;
+	unsigned int len1 = 0, len2 = 0, i;
+	char *s3;
 
-	if (width <= 0 || height <= 0)
-		return NULL;
-	arr = malloc(height * sizeof(int *));
-	if (arr == NULL)
-		return NULL;
+	if (s1 == NULL)
+		s1 = "";
+	if (s2 == NULL)
+		s2 = "";
 
-	arr[0] = malloc((width * height) * sizeof(int));
-	if (arr[0] == NULL)
+	while (s1[len1] != '\0')
+		len1++;
+	while (s2[len2] != '\0')
+		len2++;
+	s3 = malloc(((len1 + len2) + 1) * sizeof(char));
+
+	if (s3 == NULL)
 	{
-		free(arr);
+		free(s3);
 		return (NULL);
 	}
+	for (i = 0; i < len1; i++)
+		s3[i] = s1[i];
+	for (i = 0; i < len2; i++)
+		s3[len1 + i] = s2[i];
 
-	for (i = 0; i < height; i++)
-		arr[i] = arr[i - 1] + width;
+	s3[len1 + len2] = '\0';
 
-	for (i = 0; i < height; i++)
-	{
-		for (j = 0; j < width; j++)
-			arr[i][j] = 0;
-	}
-
-	return (arr);
+	return (s3);
 }
