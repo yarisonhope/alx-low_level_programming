@@ -1,39 +1,51 @@
-#include <stdlib.h>
 #include "main.h"
-
+#include <stdlib.h>
 /**
- * string_nconcat - concatenates n bytes of a string to another string
- * @s1: string to append to
- * @s2: string concatenate from
- * @n: number of byes from s2 to concatenate to s1
- *
- * Retur : pointer to the resulting string
+ * string_nconcat - concatenate two strings
+ * @s1: string to be added to
+ * @s2: string to add
+ * @n: number to be added from s2
+ * Return: NUll or pointer to the newly allocated memory space
  */
-char *string_nconcat(char *s1,char *s2, unsigned int n)
-{ 
-	char *s;
-	unsigned int i = 0, j = 0, len1 =0, len2 = 0;
+char *string_nconcat(char *s1, char *s2, unsigned int n)
+{
+	char *ptr;
+	unsigned int len1 = 0, len2 = 0, i, j;
 
-	while (s1 && s1[len])
-		len1++;
-	while (s2 && s2[len2])
-		len2++;
-
-	if (n < len2)
-		s = malloc(sizeof(char) * (len1 + n + 1));
-	else
-		s = malloc(sizeof(char) * (len1 + len2 +1));
-
-	if (!s) 
-		return (NULL);
-	
-	while (i < len1)
+	if (s1 == NULL)
 	{
-		s[i] = s1[i];
-		i++;
+		s1 = "";
 	}
-	while (n < ln2 && i < (len1 + n ))
-		s[i++] = s2[j++];
-	s[i] = '\0';
-	rturn (s);
+	if (s2 == NULL)
+	{
+		s2 = "";
+	}
+	while (s1[len1] != '\0')
+	{
+		len1++;
+	}
+	while (s2[len2] != '\0')
+	{
+		len2++;
+	}
+	if (n >= len2)
+	{
+		n = len2;
+	}
+	ptr = (char *) malloc(sizeof(char) * (len1 + n + 1));
+	if (ptr == NULL)
+	{
+		return (NULL);
+	}
+	for (i = 0; i < len1; i++)
+	{
+		ptr[i] = s1[i];
+	}
+	for (j = 0; j < n; j++)
+	{
+		ptr[i + j] = s2[j];
+	}
+	ptr[len1 + n] = '\0';
+	return (ptr);
 }
+
